@@ -1,4 +1,4 @@
-FROM nginx:1.19.3
+FROM nginx:alpine
 
 LABEL maintainer="Georgi Valchev"
 
