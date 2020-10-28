@@ -9,6 +9,11 @@ RUN apt-get -yqq update \
     && curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
+# Install Git (required by the book)
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
 COPY . /web/app/
 COPY .docker/php/php.ini /usr/local/etc/php/php.ini
 
