@@ -24,3 +24,10 @@ services:
       - 8080:80
     volumes:
       - ./public:/web/app/public
+  mariadb:
+    image: mariadb:10.1.21
+    ports:
+      - "13306:3306"
+    environment:
+      - MYSQL_DATABASE=guestbook
+      - MYSQL_ROOT_PASSWORD=password
