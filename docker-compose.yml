@@ -4,34 +4,36 @@ networks:
   app-tier:
     driver: bridge
 services:
-  app:
-    container_name: app
-    environment:
-      TZ: "Europe/Sofia"
-    build:
-      context: .
-      dockerfile: .docker/php/Dockerfile
-    networks:
-      - app-tier
-    ports:
-      - 9002:9000
-    volumes:
-      - .:/web/app
-  nginx:
-    container_name: nginx
-    environment:
-      TZ: "Europe/Sofia"
-    build:
-      context: .
-      dockerfile: .docker/nginx/Dockerfile
-    networks:
-      - app-tier
-    ports:
-      - 8080:80
-    volumes:
-      - ./public:/web/app/public
+#  app:
+#    container_name: app
+#    environment:
+#      TZ: "Europe/Sofia"
+#    build:
+#      context: .
+#      dockerfile: .docker/php/Dockerfile
+#    networks:
+#      - app-tier
+#    ports:
+#      - 9002:9000
+#    volumes:
+#      - .:/web/app
+#  nginx:
+#    container_name: nginx
+#    environment:
+#      TZ: "Europe/Sofia"
+#    build:
+#      context: .
+#      dockerfile: .docker/nginx/Dockerfile
+#    networks:
+#      - app-tier
+#    ports:
+#      - 8080:80
+#    volumes:
+#      - ./public:/web/app/public
   mariadb:
     container_name: mariadb
+    networks:
+      - app-tier
     image: mariadb:10.1.21
     ports:
       - "13306:3306"
@@ -41,6 +43,8 @@ services:
       - TZ="Europe/Sofia"
   postgres:
     container_name: postgres
+    networks:
+      - app-tier
     image: postgres:11-alpine
     environment:
       POSTGRES_USER: main
